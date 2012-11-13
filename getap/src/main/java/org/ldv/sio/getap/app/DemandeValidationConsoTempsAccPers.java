@@ -211,7 +211,7 @@ public class DemandeValidationConsoTempsAccPers {
 	 * 
 	 * 
 	 */
-	public void CreeeParLeleve() {
+	public void creeeParLeleve() {
 		if (!this.isAnnuleeEleve() && !this.isRefuseParProf()
 				&& !this.isAccepteEleveApresModifProf()
 				&& !this.isRejeteeParLeleve() && !this.isValideParProf()
@@ -229,7 +229,7 @@ public class DemandeValidationConsoTempsAccPers {
 	 * DVCTAP_ANNULEE_ELEVE,
 	 * DVCTAP_REFUS_PROF,DVCTAP_REJETEE,DVCTAP_VALIDEE_PROF
 	 */
-	public void ValideParProf() throws DVCTAPException {
+	public void valideParProf() throws DVCTAPException {
 		if (!this.isAnnuleeEleve() && !this.isRefuseParProf()
 				&& !this.isRejeteeParLeleve() && !this.isValideParProf()) {
 			this.etat = this.etat | DVCTAP_VALIDEE_PROF;
@@ -243,7 +243,7 @@ public class DemandeValidationConsoTempsAccPers {
 	 * précedent
 	 * 
 	 */
-	public void RefuseParProf() throws DVCTAPException {
+	public void refuseParProf() throws DVCTAPException {
 		if (!this.isAnnuleeEleve() && !this.isValideParProf()
 				&& !this.isAccepteEleveApresModifProf()
 				&& !this.isRejeteeParLeleve() && !this.isRefuseParProf()) {
@@ -258,7 +258,7 @@ public class DemandeValidationConsoTempsAccPers {
 	 * précedent
 	 * 
 	 */
-	public void AnnuleeEleve() throws DVCTAPException {
+	public void annuleeEleve() throws DVCTAPException {
 		if (!this.isValideParProf() && !this.isRefuseParProf()
 				&& !this.isAccepteEleveApresModifProf()
 				&& !this.isRejeteeParLeleve() && !this.isModifParProf()
@@ -291,7 +291,7 @@ public class DemandeValidationConsoTempsAccPers {
 	 * Methode permettant de passer l'état à DATE_MODIFIEE plus l'etat précedent
 	 * 
 	 */
-	public void DateModifieProf() throws DVCTAPException {
+	public void dateModifieProf() throws DVCTAPException {
 		if (!this.isValideParProf() && !this.isRefuseParProf()
 				&& !this.isAccepteEleveApresModifProf()
 				&& !this.isRejeteeParLeleve() && !this.isAnnuleeEleve()
@@ -338,7 +338,7 @@ public class DemandeValidationConsoTempsAccPers {
 	 * précedent
 	 * 
 	 */
-	public void RejeteeParLeleve() throws DVCTAPException {
+	public void rejeteeParLeleve() throws DVCTAPException {
 		if (!this.isValideParProf()
 				&& !this.isRefuseParProf()
 				&& !this.isRejeteeParLeleve()
@@ -359,7 +359,7 @@ public class DemandeValidationConsoTempsAccPers {
 	 * l'etat précedent
 	 * 
 	 */
-	public boolean AccepteEleveApresModifProf() throws DVCTAPException {
+	public boolean accepteEleveApresModifProf() throws DVCTAPException {
 		boolean verif = true;
 		if (!this.isValideParProf()
 				&& !this.isRefuseParProf()
