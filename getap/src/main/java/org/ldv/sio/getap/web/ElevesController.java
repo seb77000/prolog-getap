@@ -62,11 +62,11 @@ public class ElevesController {
 
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
 	public String deleteDCTAPById(@PathVariable String id, Model model) {
-		DemandeValidationConsoTempsAccPers currentDctap = manager.getDVCTAPById(Long
-				.valueOf(id));
+		DemandeValidationConsoTempsAccPers currentDctap = manager
+				.getDVCTAPById(Long.valueOf(id));
 		// Test que la DCTAP appartient à la bonne personne
 		if (currentDctap.getEleve().equals(UtilSession.getUserInSession())) {
-			currentDctap.setDctapAnnule();
+			currentDctap.annuleeEleve();
 			manager.updateDVCTAP(currentDctap);
 		}
 
@@ -79,8 +79,8 @@ public class ElevesController {
 
 		System.out.println("TEST id recu :" + formDctap.getId());
 
-		DemandeValidationConsoTempsAccPers currentDctap = manager.getDVCTAPById(Long
-				.valueOf(id));
+		DemandeValidationConsoTempsAccPers currentDctap = manager
+				.getDVCTAPById(Long.valueOf(id));
 
 		System.out.println("DCTAP : " + currentDctap);
 
@@ -114,8 +114,8 @@ public class ElevesController {
 			return "eleve/edit";
 		} else {
 			User user = UtilSession.getUserInSession();
-			DemandeValidationConsoTempsAccPers dctapForUpdate = manager.getDVCTAPById(Long
-					.valueOf(formDctap.getId()));
+			DemandeValidationConsoTempsAccPers dctapForUpdate = manager
+					.getDVCTAPById(Long.valueOf(formDctap.getId()));
 			if (dctapForUpdate.getEtat() == 0 || dctapForUpdate.getEtat() == 4) {
 
 				AccPersonalise acc = new AccPersonalise(null,
@@ -135,7 +135,7 @@ public class ElevesController {
 
 				dctapForUpdate.setProf(manager.getUserById(formDctap
 						.getProfId()));
-				dctapForUpdate.setDctapModifEleve();
+				dctapForUpdate.modifieeParEleve();
 				manager.updateDVCTAP(dctapForUpdate);
 			}
 
@@ -198,12 +198,13 @@ public class ElevesController {
 
 	@RequestMapping(value = "refuse/{id}", method = RequestMethod.GET)
 	public String refuseDCTAPById(@PathVariable String id, Model model) {
-		DemandeValidationConsoTempsAccPers dctap = manager.getDVCTAPById(Long.valueOf(id));
+		DemandeValidationConsoTempsAccPers dctap = manager.getDVCTAPById(Long
+				.valueOf(id));
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getEleve().equals(UtilSession.getUserInSession())
 				&& dctap.getEtat() > 1023) {
-			dctap.setDctapRejete();
+			dctap.rejeteeParLeleve();
 			manager.updateDVCTAP(dctap);
 		}
 
@@ -212,12 +213,13 @@ public class ElevesController {
 
 	@RequestMapping(value = "valid/{id}", method = RequestMethod.GET)
 	public String validDCTAPById(@PathVariable String id, Model model) {
-		DemandeValidationConsoTempsAccPers dctap = manager.getDVCTAPById(Long.valueOf(id));
+		DemandeValidationConsoTempsAccPers dctap = manager.getDVCTAPById(Long
+				.valueOf(id));
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getEleve().equals(UtilSession.getUserInSession())
 				&& dctap.getEtat() > 1023) {
-			dctap.setDctapConfirme();
+			dctap.accepteEleveApresModifProf();
 			manager.updateDVCTAP(dctap);
 		}
 
