@@ -388,53 +388,53 @@ public class DemandeValidationConsoTempsAccPers {
 	 */
 
 	public boolean isCreeeParLeleve() {
-		boolean isCreee = (this.etat & DVCTAP_CREEE) == 0;
-		return isCreee;
+
+		return (this.etat & DVCTAP_CREEE) == 0;
 	}
 
 	public boolean isAccepteEleveApresModifProf() {
-		boolean isAccepteeEleve = (this.etat & DVCTAP_ACCEPTEE_MODIF_PROF) != 0;
-		return isAccepteeEleve;
+
+		return (this.etat & DVCTAP_ACCEPTEE_MODIF_PROF) != 0;
 	}
 
 	public boolean isRejeteeParLeleve() {
-		boolean isRejetee = (this.etat & DVCTAP_REJETEE) != 0;
-		return isRejetee;
+
+		return (this.etat & DVCTAP_REJETEE) != 0;
 	}
 
 	public boolean isModifParEleve() {
-		boolean isModifEleve = (this.etat & DVCTAP_MODIFIEE_ELEVE) != 0;
-		return isModifEleve;
+
+		return (this.etat & DVCTAP_MODIFIEE_ELEVE) != 0;
 	}
 
 	public boolean isAnnuleeEleve() {
-		boolean isAnnuleeEleve = (this.etat & DVCTAP_ANNULEE_ELEVE) != 0;
-		return isAnnuleeEleve;
+
+		return (this.etat & DVCTAP_ANNULEE_ELEVE) != 0;
 	}
 
 	public boolean isValideParProf() {
-		boolean isValideProf = (this.etat & DVCTAP_VALIDEE_PROF) != 0;
-		return isValideProf;
+
+		return (this.etat & DVCTAP_VALIDEE_PROF) != 0;
 	}
 
 	public boolean isRefuseParProf() {
-		boolean isRefusProf = (this.etat & DVCTAP_REFUS_PROF) != 0;
-		return isRefusProf;
+
+		return (this.etat & DVCTAP_REFUS_PROF) != 0;
 	}
 
 	public boolean isDateModifieProf() {
-		boolean isDateModifProf = (this.etat & DATE_MODIFIEE) != 0;
-		return isDateModifProf;
+
+		return (this.etat & DATE_MODIFIEE) != 0;
 	}
 
 	public boolean isDureeModifieProf() {
-		boolean isDureeModifProf = (this.etat & DUREE_MODIFIEE) != 0;
-		return isDureeModifProf;
+
+		return (this.etat & DUREE_MODIFIEE) != 0;
 	}
 
 	public boolean isModifParProf() {
-		boolean isModifParProf = (this.etat & AP_MODIFIEE) != 0;
-		return isModifParProf;
+
+		return (this.etat & AP_MODIFIEE) != 0;
 	}
 
 }
