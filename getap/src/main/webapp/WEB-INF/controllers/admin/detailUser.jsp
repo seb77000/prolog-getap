@@ -34,10 +34,10 @@
 			<c:if test="${utilisateur.role == 'eleve'}">
 				<c:forEach items="${sesDCTAPeleve}" var="dctap">
 					<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
-					<c:if test="${dctap.etat == 0 || dctap.etat == 4 || dctap.etat > 1023}">
+					<c:if test="${dctap.dvctap_cree || dctap.dvctap_modifiee_eleve || dctap.modifie_prof}">
 						<c:set var="timeAtt" value="${timeAtt + dctap.minutes}"/>
 					</c:if>
-					<c:if test="${dctap.etat == 1 || dctap.etat == 32 }">
+					<c:if test="${dctap.dvctap_acceptee_modif_prof || dctap.dvctap_validee_prof }">
 						<tr>
 							<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 							<td>${dctap.accPers.nom}</td>
@@ -54,10 +54,10 @@
 				test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
 				<c:forEach items="${sesDCTAPprof}" var="dctap">
 					<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
-					<c:if test="${dctap.etat == 0 || dctap.etat == 4 || dctap.etat > 1023}">
+					<c:if test="${dctap.dvctap_cree || dctap.dvctap_modifiee_eleve || dctap.modifie_prof}">
 						<c:set var="timeAtt" value="${timeAtt + dctap.minutes}"/>
 					</c:if>
-					<c:if test="${dctap.etat == 1 || dctap.etat == 32 }">
+					<c:if test="${dctap.dvctap_acceptee_modif_prof || dctap.dvctap_validee_prof }">
 						<tr>
 							<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 							<td>${dctap.accPers.nom}</td>
@@ -82,7 +82,7 @@
 	</c:if>
 
 	<h3>
-		<a href="#">Demandes Refusées (${etat2 + etat8 + etat64})</a>
+		<a href="#">Demandes Refusées (${dvctap_rejetee + dvctap_annulee_eleve + dvctap_refus_prof})</a>
 	</h3>
 	<table class="display dataTable">
 		<thead>
@@ -104,7 +104,7 @@
 			<c:if test="${utilisateur.role == 'eleve'}">
 				<c:forEach items="${sesDCTAPeleve}" var="dctap">
 					<c:if
-						test="${dctap.etat == 2 || dctap.etat == 64 || dctap.etat == 8}">
+						test="${dctap.dvctap_rejetee || dctap.dvctap_refus_prof || dctap.dvctap_annulee_eleve}">
 						<tr>
 							<td>${dctap.prof.nom} ${dctap.prof.nom}</td>
 							<td>${dctap.accPers.nom}</td>
@@ -112,13 +112,13 @@
 									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#00" />h<fmt:formatNumber
 									value="${dctap.minutes%60}" pattern="#00" /></td>
 							<td>${dctap.dateAction}</td>
-							<c:if test="${dctap.etat == 2}">
+							<c:if test="${dctap.dvctap_rejetee}">
 								<td>Refus élève</td>
 							</c:if>
-							<c:if test="${dctap.etat == 8}">
+							<c:if test="${dctap.dvctap_annulee_eleve}">
 								<td>Annulé</td>
 							</c:if>
-							<c:if test="${dctap.etat == 64}">
+							<c:if test="${dctap.dvctap_refus_prof}">
 								<td>Refus prof</td>
 							</c:if>
 						</tr>
@@ -130,7 +130,7 @@
 				test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
 				<c:forEach items="${sesDCTAPprof}" var="dctap">
 					<c:if
-						test="${dctap.etat == 2 || dctap.etat == 64 || dctap.etat == 8}">
+						test="${dctap.dvctap_rejetee || dctap.dvctap_refus_prof || dctap.dvctap_annulee_eleve}">
 						<tr>
 							<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 							<td>${dctap.accPers.nom}</td>
@@ -138,13 +138,13 @@
 									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#00" />h<fmt:formatNumber
 									value="${dctap.minutes%60}" pattern="#00" /></td>
 							<td>${dctap.dateAction}</td>
-							<c:if test="${dctap.etat == 2}">
+							<c:if test="${dctap.dvctap_rejetee}">
 								<td>Refus élève</td>
 							</c:if>
-							<c:if test="${dctap.etat == 8}">
+							<c:if test="${dctap.dvctap_annulee_eleve}">
 								<td>Annulé</td>
 							</c:if>
-							<c:if test="${dctap.etat == 64}">
+							<c:if test="${dctap.dvctap_refus_prof}">
 								<td>Refus prof</td>
 							</c:if>
 						</tr>

@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<c:if test="${etat == 0 or etat == 3 }">
+<c:if test="${dvctap_cree or dvctap_modifiee_eleve }">
 	<h3 class="titre3">Modifier ma Demande</h3>
 	
 	<form:form modelAttribute="formDemandeConsoTempsAccPers" action="doedit"
@@ -81,7 +81,7 @@
 	  </div>
 	</form:form>
 </c:if>
-<c:if test="${etat != 0 and etat != 3 }">
+<c:if test="${!dvctap_cree and !dvctap_modifiee_eleve }">
 	<script type="text/javascript">
 		window.location="mesdctap"
 	</script>
