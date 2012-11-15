@@ -44,8 +44,10 @@ public class ProfInterController {
 
 		DemandeValidationConsoTempsAccPers currentDctap = manager
 				.getDVCTAPById(Long.valueOf(id));
-		if (currentDctap.getEtat() == 0 || currentDctap.getEtat() == 4
-				|| currentDctap.getEtat() > 1023) {
+		if (currentDctap.isCreeeParLeleve() || currentDctap.isModifParEleve()
+				|| currentDctap.isDateModifieProf()
+				|| currentDctap.isDureeModifieProf()
+				|| currentDctap.isModifParProf()) {
 			// valorise le bean de vue avec le dctap courant
 			dctap.setId(currentDctap.getId()); // en provenance d'un champ caché
 			dctap.setDateAction(currentDctap.getDateAction());
@@ -68,15 +70,20 @@ public class ProfInterController {
 		User me = UtilSession.getUserInSession();
 		model.addAttribute("listdctaps", manager.getAllDVCTAPByProfInterv(me));
 		Long id = me.getId();
-		model.addAttribute("etat0", manager.getAllDVCTAPByEtat(0, id));
-		model.addAttribute("etat1", manager.getAllDVCTAPByEtat(1, id));
-		model.addAttribute("etat2", manager.getAllDVCTAPByEtat(2, id));
-		model.addAttribute("etat4", manager.getAllDVCTAPByEtat(4, id));
+		model.addAttribute("dvctap_cree", manager.getAllDVCTAPByEtat(0, id));
+		model.addAttribute("dvctap_acceptee_modif_prof",
+				manager.getAllDVCTAPByEtat(1, id));
+		model.addAttribute("dvctap_rejetee", manager.getAllDVCTAPByEtat(2, id));
+		model.addAttribute("dvctap_modifiee_eleve",
+				manager.getAllDVCTAPByEtat(4, id));
 
-		model.addAttribute("etat16", manager.getAllDVCTAPByEtat(16, id));
-		model.addAttribute("etat32", manager.getAllDVCTAPByEtat(32, id));
-		model.addAttribute("etat64", manager.getAllDVCTAPByEtat(64, id));
-		model.addAttribute("etatsup1000", manager.getAllDVCTAPModifByEtat(id));
+		model.addAttribute("dvctap_annulee_eleve",
+				manager.getAllDVCTAPByEtat(16, id));
+		model.addAttribute("dvctap_validee_prof",
+				manager.getAllDVCTAPByEtat(32, id));
+		model.addAttribute("dvctap_refus_prof",
+				manager.getAllDVCTAPByEtat(64, id));
+		model.addAttribute("modifie_prof", manager.getAllDVCTAPModifByEtat(id));
 	}
 
 	@RequestMapping(value = "doedit", method = RequestMethod.POST)
@@ -127,8 +134,9 @@ public class ProfInterController {
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getProf().equals(UtilSession.getUserInSession())
-				&& (dctap.getEtat() == 0 || dctap.getEtat() == 4 || dctap
-						.getEtat() > 1023)) {
+				&& (dctap.isCreeeParLeleve() || dctap.isModifParEleve()
+						|| dctap.isDateModifieProf()
+						|| dctap.isDureeModifieProf() || dctap.isModifParProf())) {
 			dctap.refuseParProf();
 			manager.updateDVCTAP(dctap);
 		}
@@ -143,7 +151,7 @@ public class ProfInterController {
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getProf().equals(UtilSession.getUserInSession())
-				&& (dctap.getEtat() == 0 || dctap.getEtat() == 4)) {
+				&& (dctap.isCreeeParLeleve() || dctap.isModifParEleve())) {
 			dctap.valideParProf();
 			manager.updateDVCTAP(dctap);
 		}

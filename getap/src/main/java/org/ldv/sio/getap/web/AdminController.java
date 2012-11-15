@@ -161,14 +161,22 @@ public class AdminController {
 		model.addAttribute("sesDCTAPprof",
 				manager.getAllDVCTAPByProfInterv(user));
 		Long idUser = user.getId();
-		model.addAttribute("etat0", manager.getAllDVCTAPByEtat(0, idUser));
-		model.addAttribute("etat1", manager.getAllDVCTAPByEtat(1, idUser));
-		model.addAttribute("etat2", manager.getAllDVCTAPByEtat(2, idUser));
-		model.addAttribute("etat4", manager.getAllDVCTAPByEtat(4, idUser));
-		model.addAttribute("etat8", manager.getAllDVCTAPByEtat(8, idUser));
-		model.addAttribute("etat32", manager.getAllDVCTAPByEtat(32, idUser));
-		model.addAttribute("etat64", manager.getAllDVCTAPByEtat(64, idUser));
-		model.addAttribute("etatsup1000",
+		model.addAttribute("sesDCTAPeleve", manager.getAllDVCTAPByEleve(user));
+		model.addAttribute("dvctap_cree", manager.getAllDVCTAPByEtat(0, idUser));
+		model.addAttribute("dvctap_acceptee_modif_prof",
+				manager.getAllDVCTAPByEtat(1, idUser));
+		model.addAttribute("dvctap_rejetee",
+				manager.getAllDVCTAPByEtat(2, idUser));
+		model.addAttribute("dvctap_modifiee_eleve",
+				manager.getAllDVCTAPByEtat(4, idUser));
+
+		model.addAttribute("dvctap_annulee_eleve",
+				manager.getAllDVCTAPByEtat(16, idUser));
+		model.addAttribute("dvctap_validee_prof",
+				manager.getAllDVCTAPByEtat(32, idUser));
+		model.addAttribute("dvctap_refus_prof",
+				manager.getAllDVCTAPByEtat(64, idUser));
+		model.addAttribute("modifie_prof",
 				manager.getAllDVCTAPModifByEtat(idUser));
 
 		return "admin/detailUser";
@@ -532,7 +540,8 @@ public class AdminController {
 	public void exportStats(@PathVariable String id,
 			HttpServletResponse response) {
 		User user = manager.getUserById(Long.valueOf(id));
-		List<DemandeValidationConsoTempsAccPers> dctap = manager.getAllDVCTAPByEleve(user);
+		List<DemandeValidationConsoTempsAccPers> dctap = manager
+				.getAllDVCTAPByEleve(user);
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition", "attachment;filename=stats"
 				+ user.getNom() + ".pdf");
@@ -543,7 +552,8 @@ public class AdminController {
 	public void exportDemandeCsv(@PathVariable String id,
 			HttpServletResponse response) {
 		User user = manager.getUserById(Long.valueOf(id));
-		List<DemandeValidationConsoTempsAccPers> dctap = manager.getAllDVCTAPByEleve(user);
+		List<DemandeValidationConsoTempsAccPers> dctap = manager
+				.getAllDVCTAPByEleve(user);
 		response.setContentType("application/csv");
 		response.setHeader("Content-Disposition",
 				"attachment;filename=demandes" + user.getNom() + ".csv");

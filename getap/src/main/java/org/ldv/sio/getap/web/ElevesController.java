@@ -47,24 +47,20 @@ public class ElevesController {
 		User me = UtilSession.getUserInSession();
 		model.addAttribute("mesdctaps", manager.getAllDVCTAPByEleve(me));
 		Long id = me.getId();
-		model.addAttribute("DVCTAP_CREEE", manager.getAllDVCTAPByEtat(0, id));
-		model.addAttribute("DVCTAP_ACCEPTEE_MODIF_PROF",
+		model.addAttribute("dvctap_cree", manager.getAllDVCTAPByEtat(0, id));
+		model.addAttribute("dvctap_acceptee_modif_prof",
 				manager.getAllDVCTAPByEtat(1, id));
-		model.addAttribute("DVCTAP_REJETEE", manager.getAllDVCTAPByEtat(2, id));
-		model.addAttribute("DVCTAP_MODIFIEE_ELEVE",
+		model.addAttribute("dvctap_rejetee", manager.getAllDVCTAPByEtat(2, id));
+		model.addAttribute("dvctap_modifiee_eleve",
 				manager.getAllDVCTAPByEtat(4, id));
 
-		model.addAttribute("DVCTAP_ANNULEE_ELEVE",
+		model.addAttribute("dvctap_annulee_eleve",
 				manager.getAllDVCTAPByEtat(16, id));
-		model.addAttribute("DVCTAP_VALIDEE_PROF",
+		model.addAttribute("dvctap_validee_prof",
 				manager.getAllDVCTAPByEtat(32, id));
-		model.addAttribute("DVCTAP_REFUS_PROF",
+		model.addAttribute("dvctap_refus_prof",
 				manager.getAllDVCTAPByEtat(64, id));
-		model.addAttribute("DATE_MODIFIEE",
-				manager.getAllDVCTAPByEtat(1024, id));
-		model.addAttribute("DUREE_MODIFIEE",
-				manager.getAllDVCTAPByEtat(2048, id));
-		model.addAttribute("AP_MODIFIEE", manager.getAllDVCTAPByEtat(4096, id));
+		model.addAttribute("modifie_prof", manager.getAllDVCTAPModifByEtat(id));
 
 		return "eleve/mesdctap";
 	}
@@ -125,7 +121,8 @@ public class ElevesController {
 			User user = UtilSession.getUserInSession();
 			DemandeValidationConsoTempsAccPers dctapForUpdate = manager
 					.getDVCTAPById(Long.valueOf(formDctap.getId()));
-			if (dctapForUpdate.getEtat() == 0 || dctapForUpdate.getEtat() == 4) {
+			if (dctapForUpdate.isCreeeParLeleve()
+					|| dctapForUpdate.isModifParEleve()) {
 
 				AccPersonalise acc = new AccPersonalise(null,
 						formDctap.getAccPersNom(), 1, user.getId());
@@ -212,7 +209,8 @@ public class ElevesController {
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getEleve().equals(UtilSession.getUserInSession())
-				&& dctap.getEtat() > 1023) {
+				&& (dctap.isDateModifieProf() || dctap.isDureeModifieProf() || dctap
+						.isModifParProf())) {
 			dctap.rejeteeParLeleve();
 			manager.updateDVCTAP(dctap);
 		}
@@ -227,7 +225,8 @@ public class ElevesController {
 
 		// Test que la DCTAP appartient à la bonne personne
 		if (dctap.getEleve().equals(UtilSession.getUserInSession())
-				&& dctap.getEtat() > 1023) {
+				&& (dctap.isDateModifieProf() || dctap.isDureeModifieProf() || dctap
+						.isModifParProf())) {
 			dctap.accepteEleveApresModifProf();
 			manager.updateDVCTAP(dctap);
 		}

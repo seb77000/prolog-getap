@@ -73,25 +73,27 @@ public class ProfPrinController {
 				Long idUser = user.getId();
 				model.addAttribute("sesDCTAPeleve",
 						manager.getAllDVCTAPByEleve(user));
-				model.addAttribute("etat0",
+				model.addAttribute("dvctap_cree",
 						manager.getAllDVCTAPByEtat(0, idUser));
-				model.addAttribute("etat1",
+				model.addAttribute("dvctap_acceptee_modif_prof",
 						manager.getAllDVCTAPByEtat(1, idUser));
-				model.addAttribute("etat2",
+				model.addAttribute("dvctap_rejetee",
 						manager.getAllDVCTAPByEtat(2, idUser));
-				model.addAttribute("etat4",
+				model.addAttribute("dvctap_modifiee_eleve",
 						manager.getAllDVCTAPByEtat(4, idUser));
-				model.addAttribute("etat8",
-						manager.getAllDVCTAPByEtat(8, idUser));
-				model.addAttribute("etat32",
+
+				model.addAttribute("dvctap_annulee_eleve",
+						manager.getAllDVCTAPByEtat(16, idUser));
+				model.addAttribute("dvctap_validee_prof",
 						manager.getAllDVCTAPByEtat(32, idUser));
-				model.addAttribute("etat64",
+				model.addAttribute("dvctap_refus_prof",
 						manager.getAllDVCTAPByEtat(64, idUser));
-				model.addAttribute("etatsup1000",
+				model.addAttribute("modifie_prof",
 						manager.getAllDVCTAPModifByEtat(idUser));
 				return "prof-principal/detailUser";
 			}
 		}
+
 		return "redirect:/app/prof-principal/index";
 	}
 
