@@ -44,7 +44,7 @@
 		en cours</h5>
 	<div id="accordion">
 		<h3>
-			<a href="#">Demandes reçues (${etat0 + etat4})</a>
+			<a href="#">Demandes reçues (${dvctap_creee + dvctap_modifiee_eleve})</a>
 		</h3>
 		<div id="demo">
 			<form:form modelAttribute="formListIdDctap" action="sendId"
@@ -105,7 +105,7 @@
 		</div>
 		<h3>
 			<a href="#">Demandes en attentes de confirmations par l'élève
-				(${etatsup1000})</a>
+				(${modifie_prof})</a>
 		</h3>
 		<div id="demo">
 			<form:form modelAttribute="formListIdDctap" action="sendId"
@@ -177,7 +177,7 @@
 	<h5>Demandes de validation terminées</h5>
 	<div id="accordion2">
 		<h3>
-			<a href="#">Demandes validées (${etat1 + etat32})</a>
+			<a href="#">Demandes validées (${dvctap_acceptee_modif_prof + dvctap_validee_prof})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
@@ -208,7 +208,7 @@
 		</div>
 		<h3>
 			<a href="#">Demandes refusées par l'élève après modification de
-				votre part (${etat2})</a>
+				votre part (${dvctap_rejetee})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
@@ -238,7 +238,7 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Vos demandes refusées (${etat64})</a>
+			<a href="#">Vos demandes refusées (${dvctap_refus_prof})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">

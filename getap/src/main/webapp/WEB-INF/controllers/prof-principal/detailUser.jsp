@@ -11,7 +11,7 @@
 <h3 class="titre3">Détail des demandes de ${utilisateur.nom} ${utilisateur.prenom}</h3>
 <div id="accordion">
 	<h3>
-		<a href="#">Demandes Validées (${etat1 + etat32})</a>
+		<a href="#">Demandes Validées (${dvctap_acceptee_modif_prof + dvctap_validee_prof})</a>
 	</h3>
 	<table class="display dataTable">
 		<thead>
@@ -49,7 +49,7 @@
 		</script>
 
 	<h3>
-		<a href="#">Demandes Refusées (${etat2 + etat8 + etat64})</a>
+		<a href="#">Demandes Refusées (${dvctap_rejetee + dvctap_annulee_eleve + dvctap_refus_prof})</a>
 	</h3>
 	<table class="display dataTable">
 		<thead>
@@ -90,7 +90,7 @@
 		</tbody>
 	</table>
 	<h3>
-		<a href="#">Demandes en Cours (${etat0 + etat4 + etatsup1000})</a>
+		<a href="#">Demandes en Cours (${dvctap_creee + dvctap_modifiee_eleve + modifie_prof})</a>
 	</h3>
 	<table class="display dataTable">
 		<thead>
