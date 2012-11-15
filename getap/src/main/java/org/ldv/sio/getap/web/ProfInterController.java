@@ -78,7 +78,7 @@ public class ProfInterController {
 				manager.getAllDVCTAPByEtat(4, id));
 
 		model.addAttribute("dvctap_annulee_eleve",
-				manager.getAllDVCTAPByEtat(16, id));
+				manager.getAllDVCTAPByEtat(8, id));
 		model.addAttribute("dvctap_validee_prof",
 				manager.getAllDVCTAPByEtat(32, id));
 		model.addAttribute("dvctap_refus_prof",

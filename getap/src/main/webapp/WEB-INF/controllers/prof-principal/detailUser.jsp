@@ -25,7 +25,7 @@
 		<tbody>
 			<c:forEach items="${sesDCTAPeleve}" var="dctap">
 				<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
-				<c:if test="${dctap.etat == 1 || dctap.etat == 32 }">
+				<c:if test="${dctap.dvctap_cree || dctap.dvctap_validee_prof }">
 					<tr>
 						<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 						<td>${dctap.accPers.nom}</td>
@@ -64,7 +64,7 @@
 		<tbody>
 			<c:forEach items="${sesDCTAPeleve}" var="dctap">
 				<c:if
-					test="${dctap.etat == 2 || dctap.etat == 64 || dctap.etat == 8}">
+					test="${dctap.dvctap_rejetee || dctap.dvctap_refus_prof || dctap.dvctap_annulee_eleve}">
 					<tr>
 						<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 						<td>${dctap.accPers.nom}</td>
@@ -74,13 +74,13 @@
 										value="${dctap.minutes%60}"
 										pattern="#00" /></td>
 						<td>${dctap.dateAction}</td>
-						<c:if test="${dctap.etat == 2}">
+						<c:if test="${dctap.dvctap_rejetee}">
 							<td>Refus élève</td>
 						</c:if>
-						<c:if test="${dctap.etat == 8}">
+						<c:if test="${dctap.dvctap_annulee_eleve}">
 							<td>Annulé</td>
 						</c:if>
-						<c:if test="${dctap.etat == 64}">
+						<c:if test="${dctap.dvctap_refus_prof}">
 							<td>Refus prof</td>
 						</c:if>
 					</tr>
@@ -104,7 +104,7 @@
 		<tbody>
 			<c:forEach items="${sesDCTAPeleve}" var="dctap">
 				<c:if
-					test="${dctap.etat == 0 || dctap.etat == 4 || dctap.etat > 1023 }">
+					test="${dctap.dvctap_cree || dctap.dvctap_modifiee_eleve || dctap.modifie_prof }">
 					<tr>
 						<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 						<td>${dctap.accPers.nom}</td>
