@@ -26,7 +26,7 @@
 		en cours</h5>
 	<div id="accordion">
 		<h3>
-			<a href="#">Demandes non traitées (${etat0 + etat4})</a>
+			<a href="#">Demandes non traitées (${dvctap_creee + dvctap_modifee_eleve})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
@@ -69,7 +69,7 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Demandes modifiées par le professeur (${etatsup1000})</a>
+			<a href="#">Demandes modifiées par le professeur (${modifie_prof})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
@@ -136,7 +136,7 @@
 	<h5>Demandes terminées</h5>
 	<div id="accordion2">
 		<h3>
-			<a href="#">Demandes validées (${etat1 + etat32})</a>
+			<a href="#">Demandes validées (${dvctap_acceptee_modif_prof + dvctap_validee_prof})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
@@ -167,7 +167,7 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Demandes refusées par le professeur (${etat64})</a>
+			<a href="#">Demandes refusées par le professeur (${dvctap_refus_prof})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
@@ -198,7 +198,7 @@
 			</table>
 		</div>
 		<h3>
-			<a href="#">Vos demandes refusées (${etat2})</a>
+			<a href="#">Vos demandes refusées (${dvctap_rejetee})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
