@@ -1,7 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 
 <c:set var="timeTT" value="0" />
@@ -13,7 +14,7 @@
 	${utilisateur.prenom}</h3>
 <div id="accordion">
 	<h3>
-		<a href="#">Demandes Validées (${etat1 + etat32})</a>
+		<a href="#">Demandes Validées (${dvctap_acceptee_modif_prof + dvctap_validee_prof})</a>
 	</h3>
 	<table class="display dataTable">
 		<thead>
@@ -34,10 +35,12 @@
 			<c:if test="${utilisateur.role == 'eleve'}">
 				<c:forEach items="${sesDCTAPeleve}" var="dctap">
 					<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
-					<c:if test="${dctap.dvctap_cree || dctap.dvctap_modifiee_eleve || dctap.modifie_prof}">
-						<c:set var="timeAtt" value="${timeAtt + dctap.minutes}"/>
+					<c:if
+						test="${dctap.creeeParLeleve || dctap.modifParEleve || dctap.dateModifieProf || dctap.dureeModifieProf || dctap.modifParProf}">
+						<c:set var="timeAtt" value="${timeAtt + dctap.minutes}" />
 					</c:if>
-					<c:if test="${dctap.dvctap_acceptee_modif_prof || dctap.dvctap_validee_prof }">
+					<c:if
+						test="${dctap.accepteEleveApresModifProf || dctap.valideParProf }">
 						<tr>
 							<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 							<td>${dctap.accPers.nom}</td>
@@ -54,10 +57,12 @@
 				test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
 				<c:forEach items="${sesDCTAPprof}" var="dctap">
 					<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
-					<c:if test="${dctap.dvctap_cree || dctap.dvctap_modifiee_eleve || dctap.modifie_prof}">
-						<c:set var="timeAtt" value="${timeAtt + dctap.minutes}"/>
+					<c:if
+						test="${dctap.creeeParLeleve || dctap.modifParEleve || dctap.dateModifieProf || dctap.dureeModifieProf || dctap.modifParProf}">
+						<c:set var="timeAtt" value="${timeAtt + dctap.minutes}" />
 					</c:if>
-					<c:if test="${dctap.dvctap_acceptee_modif_prof || dctap.dvctap_validee_prof }">
+					<c:if
+						test="${dctap.accepteEleveApresModifProf || dctap.valideParProf }">
 						<tr>
 							<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 							<td>${dctap.accPers.nom}</td>
@@ -75,14 +80,15 @@
 
 	<c:if test="${utilisateur.role == 'eleve'}">
 		<script>
-			$(document).ready(function() {
-				 $("#progressbar").progressbar({ value: ${timeVal/(72*60)*100} });
-			});
-		</script>
+$(document).ready(function() {
+$("#progressbar").progressbar({ value: ${timeVal/(72*60)*100} });
+});
+</script>
 	</c:if>
 
 	<h3>
-		<a href="#">Demandes Refusées (${dvctap_rejetee + dvctap_annulee_eleve + dvctap_refus_prof})</a>
+		<a href="#">Demandes Refusées (${dvctap_rejetee +
+			dvctap_annulee_eleve + dvctap_refus_prof})</a>
 	</h3>
 	<table class="display dataTable">
 		<thead>
@@ -104,7 +110,7 @@
 			<c:if test="${utilisateur.role == 'eleve'}">
 				<c:forEach items="${sesDCTAPeleve}" var="dctap">
 					<c:if
-						test="${dctap.dvctap_rejetee || dctap.dvctap_refus_prof || dctap.dvctap_annulee_eleve}">
+						test="${dctap.rejeteeParLeleve || dctap.refuseParProf || dctap.annuleeEleve}">
 						<tr>
 							<td>${dctap.prof.nom} ${dctap.prof.nom}</td>
 							<td>${dctap.accPers.nom}</td>
@@ -112,13 +118,13 @@
 									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#00" />h<fmt:formatNumber
 									value="${dctap.minutes%60}" pattern="#00" /></td>
 							<td>${dctap.dateAction}</td>
-							<c:if test="${dctap.dvctap_rejetee}">
+							<c:if test="${dctap.rejeteeParLeleve}">
 								<td>Refus élève</td>
 							</c:if>
-							<c:if test="${dctap.dvctap_annulee_eleve}">
+							<c:if test="${dctap.annuleeEleve}">
 								<td>Annulé</td>
 							</c:if>
-							<c:if test="${dctap.dvctap_refus_prof}">
+							<c:if test="${dctap.refuseParProf}">
 								<td>Refus prof</td>
 							</c:if>
 						</tr>
@@ -130,7 +136,7 @@
 				test="${utilisateur.role == 'prof-internant' or utilisateur.role == 'prof-principal'}">
 				<c:forEach items="${sesDCTAPprof}" var="dctap">
 					<c:if
-						test="${dctap.dvctap_rejetee || dctap.dvctap_refus_prof || dctap.dvctap_annulee_eleve}">
+						test="${dctap.rejeteeParLeleve || dctap.refuseParProf || dctap.annuleeEleve}">
 						<tr>
 							<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 							<td>${dctap.accPers.nom}</td>
@@ -138,13 +144,13 @@
 									value="${dctap.minutes/60-(dctap.minutes%60/60)}" pattern="#00" />h<fmt:formatNumber
 									value="${dctap.minutes%60}" pattern="#00" /></td>
 							<td>${dctap.dateAction}</td>
-							<c:if test="${dctap.dvctap_rejetee}">
+							<c:if test="${dctap.rejeteeParLeleve}">
 								<td>Refus élève</td>
 							</c:if>
-							<c:if test="${dctap.dvctap_annulee_eleve}">
+							<c:if test="${dctap.annuleeEleve}">
 								<td>Annulé</td>
 							</c:if>
-							<c:if test="${dctap.dvctap_refus_prof}">
+							<c:if test="${dctap.refuseParProf}">
 								<td>Refus prof</td>
 							</c:if>
 						</tr>
@@ -211,10 +217,10 @@
 	<tr>
 		<td><a
 			href="<c:url value="/app/admin/exportStats/${utilisateur.id}" />"><img
-				src="<c:url value="../../images/pdfdl.png"/>" width="64"
-				height="64" />
+				src="<c:url value="../../images/pdfdl.png"/>" width="64" height="64" />
 				<div>Export PDF statistiques</div> </a></td>
-		<td><a href="<c:url value="/app/admin/exportDemandeCsv/${utilisateur.id}" />"><img
+		<td><a
+			href="<c:url value="/app/admin/exportDemandeCsv/${utilisateur.id}" />"><img
 				src="<c:url value="../../images/exportcsv.png"/>" width="64"
 				height="64" />
 				<div>Export CSV des demandes</div> </a></td>
