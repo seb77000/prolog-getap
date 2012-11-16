@@ -388,7 +388,7 @@ public class DemandeValidationConsoTempsAccPers {
 	 */
 
 	public boolean isCreeeParLeleve() {
-		if (etat == DVCTAP_CREEE) {
+		if (this.etat == DVCTAP_CREEE) {
 			return true;
 		}
 		return false;

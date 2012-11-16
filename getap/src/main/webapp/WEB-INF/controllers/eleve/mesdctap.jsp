@@ -89,13 +89,13 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${mesdctaps}" var="dctap">
-						<c:if test="${modifParProf or dureeModifieProf or dateModifieProf}">
+						<c:if test="${dctap.modifParProf or dctap.dureeModifieProf or dctap.dateModifieProf}">
 							<tr>
 								<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
-								<c:if test="${dateModifiee}">
+								<c:if test="${dctap.dateModifieProf}">
 									<td class="isUpdate">${dctap.dateAction}</td>
 								</c:if>
-								<c:if test="${!dateModifiee}">
+								<c:if test="${!dctap.dateModifieProf}">
 									<td>${dctap.dateAction}</td>
 								</c:if>
 								<c:if test="${dctap.dureeModifieProf}">
@@ -106,7 +106,7 @@
 										pattern="#00" /></td>
 								</c:if>
 
-								<c:if test="${!dureeModifieProf}">
+								<c:if test="${!dctap.dureeModifieProf}">
 
 									<td><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
@@ -114,10 +114,10 @@
 										value="${dctap.minutes%60}"
 										pattern="#00" /></td>
 								</c:if>
-								<c:if test="${modifParProf}">
+								<c:if test="${dctap.modifParProf}">
 									<td class="isUpdate">${dctap.accPers.nom}</td>
 								</c:if>
-								<c:if test="${!modifParProf}">
+								<c:if test="${!dctap.modifParProf}">
 									<td>${dctap.accPers.nom}</td>
 								</c:if>
 								<td><a
@@ -187,7 +187,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${mesdctaps}" var="dctap">
-						<c:if test="${refuseParProf }">
+						<c:if test="${dctap.refuseParProf }">
 							<tr>
 								<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 								<td>${dctap.dateAction}</td>
@@ -217,7 +217,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${mesdctaps}" var="dctap">
-						<c:if test="${rejeteeParLeleve}">
+						<c:if test="${dctap.rejeteeParLeleve}">
 							<tr>
 								<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 								<td>${dctap.dateAction}</td>
@@ -236,19 +236,19 @@
 	</div>
 		<c:forEach items="${mesdctaps}" var="dctap">
 		<c:set var="timeTT" value="${timeTT + dctap.minutes}" />
-		<c:if test="${accepteEleveApresModifProf or valideParProf }">
+		<c:if test="${dctap.accepteEleveApresModifProf or dctap.valideParProf }">
 			<c:set var="timeVal" value="${timeVal + dctap.minutes}" />
 		</c:if>
 	</c:forEach>
 	<c:forEach items="${mesdctaps}" var="dctap">
-		<c:if test="${dvctap_rejetee or dvctap_refus_prof or dvctap_annulee_eleve}">
+		<c:if test="${rejeteeParLeleve or refuseParProf or annuleeEleve}">
 			<c:set var="timeRef" value="${timeRef + dctap.minutes}" />
 		</c:if>
 	</c:forEach>
 	<c:forEach items="${mesdctaps}" var="dctap">
 		<c:if
 
-			test="${dctap.dvctap_cree || dctap.dvctap_modifiee_eleve || dctap.modifie_prof }">
+			test="${dctap.creeeParLeleve || dctap.modifParEleve || dctap.dateModifieProf || dctap.dureeModifieProf || dctap.modifParProf}">
 
 			<c:set var="timeAtt" value="${timeAtt + dctap.minutes}" />
 		</c:if>

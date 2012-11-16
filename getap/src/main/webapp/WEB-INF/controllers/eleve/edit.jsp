@@ -81,7 +81,7 @@
 	  </div>
 	</form:form>
 </c:if>
-<c:if test="${!dvctap_cree and !dvctap_modifiee_eleve }">
+<c:if test="${!dctap.creeeParLeleve and !dctap.modifParEleve }">
 	<script type="text/javascript">
 		window.location="mesdctap"
 	</script>
