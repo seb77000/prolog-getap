@@ -2,6 +2,9 @@ package org.ldv.sio.getap.app;
 
 import java.sql.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Demande de validation d'un temps d'accompagnement personnalisé
  * 
@@ -55,6 +58,8 @@ public class DemandeValidationConsoTempsAccPers {
 *
 */
 	private int etat;
+	private final Logger logger = LoggerFactory
+			.getLogger(DemandeValidationConsoTempsAccPers.class);
 
 	/**
 	 * constructeur par défaut
@@ -218,6 +223,7 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isModifParProf() && !this.isModifParProf()
 				&& !this.isDateModifieProf() && !this.isDureeModifieProf()) {
 			this.etat = this.etat | DVCTAP_CREEE;
+			logger.info("Initalisation:" + this.toString());
 		} else {
 			throw new DVCTAPException("Erreur lors du changement de l'état !");
 		}
@@ -233,6 +239,7 @@ public class DemandeValidationConsoTempsAccPers {
 		if (!this.isAnnuleeEleve() && !this.isRefuseParProf()
 				&& !this.isRejeteeParLeleve() && !this.isValideParProf()) {
 			this.etat = this.etat | DVCTAP_VALIDEE_PROF;
+			logger.info("Validation:" + this.toString());
 		} else {
 			throw new DVCTAPException("Erreur lors du changement de l'état !");
 		}
@@ -248,6 +255,7 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isAccepteEleveApresModifProf()
 				&& !this.isRejeteeParLeleve() && !this.isRefuseParProf()) {
 			this.etat = this.etat | DVCTAP_REFUS_PROF;
+			logger.info("Refus du prof:" + this.toString());
 		} else {
 			throw new DVCTAPException("Erreur lors du changement de l'état !");
 		}
@@ -265,6 +273,7 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isDureeModifieProf() && !this.isDateModifieProf()
 				&& !this.isAnnuleeEleve()) {
 			this.etat = this.etat | DVCTAP_ANNULEE_ELEVE;
+			logger.info("Annulee par l'eleve:" + this.toString());
 		} else {
 			throw new DVCTAPException("Erreur lors du changement de l'état !");
 		}
@@ -282,6 +291,7 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isDureeModifieProf() && !this.isDateModifieProf()
 				&& !this.isAnnuleeEleve()) {
 			this.etat = this.etat | DVCTAP_MODIFIEE_ELEVE;
+			logger.info("Modifie par l eleve:" + this.toString());
 		} else {
 			throw new DVCTAPException("Erreur lors du changement de l'état !");
 		}
@@ -297,6 +307,7 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isRejeteeParLeleve() && !this.isAnnuleeEleve()
 				&& !this.isRefuseParProf() && !this.isValideParProf()) {
 			this.etat = this.etat | DATE_MODIFIEE;
+			logger.info("Date modifie:" + this.toString());
 		} else {
 			throw new DVCTAPException("Erreur lors du changement de l'état !");
 		}
@@ -313,6 +324,8 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isRejeteeParLeleve() && !this.isAnnuleeEleve()
 				&& !this.isRefuseParProf() && !this.isValideParProf()) {
 			this.etat = this.etat | DUREE_MODIFIEE;
+			logger.info("Modification de la duree par le  professeur:"
+					+ this.toString());
 		} else {
 			throw new DVCTAPException("Erreur lors du changement de l'état !");
 		}
@@ -328,6 +341,7 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isRejeteeParLeleve() && !this.isAnnuleeEleve()
 				&& !this.isRefuseParProf() && !this.isValideParProf()) {
 			this.etat = this.etat | AP_MODIFIEE;
+			logger.info("Modification par le prof:" + this.toString());
 		} else {
 			throw new DVCTAPException("Erreur lors du changement de l'état !");
 		}
@@ -348,6 +362,7 @@ public class DemandeValidationConsoTempsAccPers {
 				&& !this.isRejeteeParLeleve()
 				&& (this.isModifParProf() || this.isDateModifieProf() || this
 						.isDureeModifieProf())) {
+			logger.info("Refus de l eleve" + this.toString());
 			this.etat = this.etat | DVCTAP_REJETEE;
 		} else {
 			throw new DVCTAPException("Erreur lors du changement de l'état !");
@@ -372,6 +387,7 @@ public class DemandeValidationConsoTempsAccPers {
 						.isDureeModifieProf())) {
 			this.etat = this.etat | DVCTAP_ACCEPTEE_MODIF_PROF;
 			verif = true;
+			logger.info("Accepte par l eleve:" + this.toString());
 		} else {
 			System.out.println("Erreur lors du changement de l'état !");
 			verif = false;

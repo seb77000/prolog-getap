@@ -40,6 +40,9 @@
 	<logger name="org.springframework.webflow">
 		<level value="info" />
 	</logger>
+	<logger name="org.ldv.sio.getap.app">
+		<level value="info" />
+	</logger>
 
 	<!-- Root Logger -->
 	<root>
