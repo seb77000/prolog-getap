@@ -26,7 +26,7 @@
 		en cours</h5>
 	<div id="accordion">
 		<h3>
-			<a href="#">Demandes non traitées (${dvctap_cree + dvctap_modifee_eleve})</a>
+			<a href="#">Demandes non traitées (${creeeParLeleve + dvctap_modifee_eleve})</a>
 		</h3>
 		<div id="demo">
 			<table class="display dataTable">
@@ -42,7 +42,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${mesdctaps}" var="dctap">
-						<c:if test="${dctap.dvctap_cree or dctap.dvctap_modifee_eleve }">
+						<c:if test="${dctap.creeeParLeleve or dctap.dvctap_modifee_eleve }">
 							<tr>
 								<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 								<td>${dctap.dateAction}</td>
@@ -94,14 +94,14 @@
 								<c:if test="${!dctap.dateModifiee}">
 									<td>${dctap.dateAction}</td>
 								</c:if>
-								<c:if test="${dctap.dureeModifiee}">
+								<c:if test="${dctap.dureeModifieProf}">
 									<td class="isUpdate"><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
 										pattern="#00" />h<fmt:formatNumber
 										value="${dctap.minutes%60}"
 										pattern="#00" /></td>
 								</c:if>
-								<c:if test="${!dctap.dureeModifiee}">
+								<c:if test="${!dctap.dureeModifieProf}">
 									<td><fmt:formatNumber
 										value="${(dctap.minutes/60)-((dctap.minutes%60)/60)}"
 										pattern="#00" />h<fmt:formatNumber
@@ -242,7 +242,7 @@
 	</c:forEach>
 	<c:forEach items="${mesdctaps}" var="dctap">
 		<c:if
-			test="${dctap.dvctap_cree || dctap.dvctap_modifiee_eleve || dctap.modifie_prof }">
+			test="${dctap.creeeParLeleve || dctap.dvctap_modifiee_eleve || dctap.modifie_prof }">
 			<c:set var="timeAtt" value="${timeAtt + dctap.minutes}" />
 		</c:if>
 	</c:forEach>
