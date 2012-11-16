@@ -388,9 +388,16 @@ public class DemandeValidationConsoTempsAccPers {
 	 */
 
 	public boolean isCreeeParLeleve() {
-
-		return (this.etat & DVCTAP_CREEE) == 0;
+		if (etat == DVCTAP_CREEE) {
+			return true;
+		}
+		return false;
 	}
+
+	// public boolean isCreeeParLeleve() {
+	//
+	// return (this.etat & DVCTAP_CREEE) == 0;
+	// }
 
 	public boolean isAccepteEleveApresModifProf() {
 
