@@ -125,13 +125,13 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${listdctaps}" var="dctap">
-							<c:if test="${dateModifieProf or dureeModifieProf or modifParProf}">
+							<c:if test="${dctap.dateModifieProf || dctap.dureeModifieProf || dctap.modifParProf}">
 								<tr>
 									<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 									<c:if test="${dctap.dateModifieProf}">
 										<td class="isUpdate">${dctap.dateAction}</td>
 									</c:if>
-									<c:if test="${!dctap.dateModifiee}">
+									<c:if test="${!dctap.dateModifieProf}">
 										<td>${dctap.dateAction}</td>
 									</c:if>
 									<c:if test="${dctap.dureeModifieProf}">
@@ -191,7 +191,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${listdctaps}" var="dctap">
-						<c:if test="${accepteEleveApresModifProf or valideParProf}">
+						<c:if test="${dctap.accepteEleveApresModifProf || dctap.valideParProf}">
 							<tr>
 								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 								<td>${dctap.dateAction}</td>
@@ -222,7 +222,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${listdctaps}" var="dctap">
-						<c:if test="${rejeteeParLeleve}">
+						<c:if test="${dctap.rejeteeParLeleve}">
 							<tr>
 								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 								<td>${dctap.dateAction}</td>
@@ -252,7 +252,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${listdctaps}" var="dctap">
-						<c:if test="${refuseParProf}">
+						<c:if test="${dctap.refuseParProf}">
 							<tr>
 								<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 								<td>${dctap.dateAction}</td>
