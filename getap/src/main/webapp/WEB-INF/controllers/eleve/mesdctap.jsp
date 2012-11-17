@@ -27,10 +27,13 @@
 	<div id="accordion">
 		<h3>
 
-			<a href="#">Demandes non traitées (${dvctap_cree + modifie_prof})</a>
+			<a href="#">Demandes non traitées (${dvctap_cree + dctap.modifParEleve})</a>
 
 		</h3>
 		<div id="demo">
+		
+		
+		
 			<table class="display dataTable">
 				<thead>
 					<tr class="header">
@@ -40,12 +43,12 @@
 						<th>Type d'aide</th>
 						<th></th>
 						<th></th>
+						
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${mesdctaps}" var="dctap">
-
-						<c:if test="${dctap.creeeParLeleve or dctap.modifParEleve }">
+						<c:if test="${dctap.creeeParLeleve or dctap.modifParEleve}">
 
 							<tr>
 								<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>

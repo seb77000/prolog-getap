@@ -66,7 +66,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${listdctaps}" var="dctap">
-							<c:if test="${creeeParLeleve or modifParEleve}">
+							<c:if test="${dctap.creeeParLeleve or dctap.modifParEleve}">
 								<tr>
 									<td>${dctap.eleve.nom} ${dctap.eleve.prenom}</td>
 									<td>${dctap.eleve.classe.nom}</td>
