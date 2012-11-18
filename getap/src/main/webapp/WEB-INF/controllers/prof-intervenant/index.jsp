@@ -44,7 +44,7 @@
 		en cours</h5>
 	<div id="accordion">
 		<h3>
-			<a href="#">Demandes reçues (${dvctap_creee + dvctap_modifiee_eleve})</a>
+			<a href="#">Demandes reçues (${dvctap_cree + dvctap_modifiee_eleve})</a>
 		</h3>
 		<div id="demo">
 			<form:form modelAttribute="formListIdDctap" action="sendId"

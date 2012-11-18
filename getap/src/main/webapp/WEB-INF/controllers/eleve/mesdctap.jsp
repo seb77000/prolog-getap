@@ -92,7 +92,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${mesdctaps}" var="dctap">
-						<c:if test="${dctap.modifParProf or dctap.dureeModifieProf or dctap.dateModifieProf}">
+						<c:if test="${dctap.modifParProf || dctap.dureeModifieProf || dctap.dateModifieProf}">
 							<tr>
 								<td>${dctap.prof.nom} ${dctap.prof.prenom}</td>
 								<c:if test="${dctap.dateModifieProf}">

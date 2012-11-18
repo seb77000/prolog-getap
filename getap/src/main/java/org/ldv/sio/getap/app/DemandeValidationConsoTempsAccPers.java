@@ -220,8 +220,8 @@ public class DemandeValidationConsoTempsAccPers {
 		if (!this.isAnnuleeEleve() && !this.isRefuseParProf()
 				&& !this.isAccepteEleveApresModifProf()
 				&& !this.isRejeteeParLeleve() && !this.isValideParProf()
-				&& !this.isModifParProf() && !this.isModifParProf()
-				&& !this.isDateModifieProf() && !this.isDureeModifieProf()) {
+				&& !this.isModifParProf() && !this.isDateModifieProf()
+				&& !this.isDureeModifieProf()) {
 			this.etat = this.etat | DVCTAP_CREEE;
 			logger.info("Initalisation:" + this.toString());
 		} else {
@@ -253,7 +253,7 @@ public class DemandeValidationConsoTempsAccPers {
 	public void refuseParProf() throws DVCTAPException {
 		if (!this.isAnnuleeEleve() && !this.isValideParProf()
 				&& !this.isAccepteEleveApresModifProf()
-				&& !this.isRejeteeParLeleve() && !this.isRefuseParProf()) {
+				&& !this.isRefuseParProf() && !this.isRejeteeParLeleve()) {
 			this.etat = this.etat | DVCTAP_REFUS_PROF;
 			logger.info("Refus du prof:" + this.toString());
 		} else {
@@ -304,8 +304,7 @@ public class DemandeValidationConsoTempsAccPers {
 	public void dateModifieProf() throws DVCTAPException {
 		if (!this.isValideParProf() && !this.isRefuseParProf()
 				&& !this.isAccepteEleveApresModifProf()
-				&& !this.isRejeteeParLeleve() && !this.isAnnuleeEleve()
-				&& !this.isRefuseParProf() && !this.isValideParProf()) {
+				&& !this.isRejeteeParLeleve() && !this.isAnnuleeEleve()) {
 			this.etat = this.etat | DATE_MODIFIEE;
 			logger.info("Date modifie:" + this.toString());
 		} else {
@@ -321,8 +320,7 @@ public class DemandeValidationConsoTempsAccPers {
 	public void modifieeDureeParLeProfesseur() throws DVCTAPException {
 		if (!this.isValideParProf() && !this.isRefuseParProf()
 				&& !this.isAccepteEleveApresModifProf()
-				&& !this.isRejeteeParLeleve() && !this.isAnnuleeEleve()
-				&& !this.isRefuseParProf() && !this.isValideParProf()) {
+				&& !this.isRejeteeParLeleve() && !this.isAnnuleeEleve()) {
 			this.etat = this.etat | DUREE_MODIFIEE;
 			logger.info("Modification de la duree par le  professeur:"
 					+ this.toString());
@@ -338,8 +336,7 @@ public class DemandeValidationConsoTempsAccPers {
 	public void modifieeAPParLeProfesseur() throws DVCTAPException {
 		if (!this.isValideParProf() && !this.isRefuseParProf()
 				&& !this.isAccepteEleveApresModifProf()
-				&& !this.isRejeteeParLeleve() && !this.isAnnuleeEleve()
-				&& !this.isRefuseParProf() && !this.isValideParProf()) {
+				&& !this.isRejeteeParLeleve() && !this.isAnnuleeEleve()) {
 			this.etat = this.etat | AP_MODIFIEE;
 			logger.info("Modification par le prof:" + this.toString());
 		} else {
@@ -350,18 +347,10 @@ public class DemandeValidationConsoTempsAccPers {
 	/**
 	 * Methode permettant de passer l'état à DVCTAP_REJETEE plus l'etat
 	 * précedent
-	 * 
 	 */
 	public void rejeteeParLeleve() throws DVCTAPException {
-		if (!this.isValideParProf()
-				&& !this.isRefuseParProf()
-				&& !this.isRejeteeParLeleve()
-				&& !this.isAnnuleeEleve()
-				&& !this.isRefuseParProf()
-				&& !this.isValideParProf()
-				&& !this.isRejeteeParLeleve()
-				&& (this.isModifParProf() || this.isDateModifieProf() || this
-						.isDureeModifieProf())) {
+		if (!this.isValideParProf() && !this.isRefuseParProf()
+				&& !this.isRejeteeParLeleve() && !this.isAnnuleeEleve()) {
 			logger.info("Refus de l eleve" + this.toString());
 			this.etat = this.etat | DVCTAP_REJETEE;
 		} else {
@@ -372,27 +361,20 @@ public class DemandeValidationConsoTempsAccPers {
 	/**
 	 * Methode permettant de passer l'état à DVCTAP_ACCEPTEE_MODIF_PROF plus
 	 * l'etat précedent
-	 * 
 	 */
-	public boolean accepteEleveApresModifProf() throws DVCTAPException {
-		boolean verif = true;
+	public void accepteEleveApresModifProf() throws DVCTAPException {
 		if (!this.isValideParProf()
-				&& !this.isRefuseParProf()
 				&& !this.isRejeteeParLeleve()
 				&& !this.isAnnuleeEleve()
 				&& !this.isRefuseParProf()
-				&& !this.isValideParProf()
 				&& !this.isAccepteEleveApresModifProf()
 				&& (this.isModifParProf() || this.isDateModifieProf() || this
 						.isDureeModifieProf())) {
 			this.etat = this.etat | DVCTAP_ACCEPTEE_MODIF_PROF;
-			verif = true;
 			logger.info("Accepte par l eleve:" + this.toString());
 		} else {
 			System.out.println("Erreur lors du changement de l'état !");
-			verif = false;
 		}
-		return verif;
 	}
 
 	/**

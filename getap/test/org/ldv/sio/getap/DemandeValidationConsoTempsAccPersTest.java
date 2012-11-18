@@ -130,7 +130,7 @@ public class DemandeValidationConsoTempsAccPersTest extends TestCase {
 	public void testRejete() {
 		try {
 			dvctap.creeeParLeleve();
-			dvctap.dateModifieProf();
+			dvctap.isModifParProf();
 			dvctap.rejeteeParLeleve();
 
 		}
@@ -145,7 +145,6 @@ public class DemandeValidationConsoTempsAccPersTest extends TestCase {
 	/**
 	 * Test permettant de montrer que l'élève ne peut annulé accepté une demande
 	 * modifer par le professeur apres l'avoir annulé.
-	 * 
 	 */
 	@Test
 	public void testAccepteEleveApresModifProfNonValide() {
@@ -153,7 +152,6 @@ public class DemandeValidationConsoTempsAccPersTest extends TestCase {
 		try {
 			dvctap.creeeParLeleve();
 			dvctap.dateModifieProf();
-			dvctap.annuleeEleve();
 			dvctap.accepteEleveApresModifProf();
 
 		} catch (DVCTAPException e) {
@@ -168,7 +166,6 @@ public class DemandeValidationConsoTempsAccPersTest extends TestCase {
 	public void testAnnuleParEleveNonValide() {
 		try {
 			dvctap.creeeParLeleve();
-			dvctap.valideParProf();
 			dvctap.annuleeEleve();
 
 		}
